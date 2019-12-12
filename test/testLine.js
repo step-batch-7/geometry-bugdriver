@@ -10,4 +10,19 @@ describe("Line", () => {
       assert.strictEqual(line.toString(), expected);
     });
   });
+
+  describe("isEqualTo", () => {
+    it("should check if given object is same", () => {
+      const line1 = new Line(1, 2, 2, 1);
+      const line2 = new Line(1, 2, 2, 1);
+      const actual = line1.isEqualTo(line2);
+      assert.strictEqual(actual, true);
+    });
+    it("should check if given object is not same", () => {
+      const line1 = new Line(1, 2, 2, 1);
+      const line2 = new Line(1, 2, 2, 3);
+      const actual = line1.isEqualTo(line2);
+      assert.strictEqual(actual, false);
+    });
+  });
 });
