@@ -12,11 +12,13 @@ class Line {
     return `Line{(${this.start.x},${this.start.y}),(${this.end.x},${this.end.y})}`;
   }
 
-  isEqualTo(otherLine) {
-    const isSameType = otherLine instanceof Line;
-    const startEqual = arePointsEqual(this.start, otherLine.start);
-    const endEqual = arePointsEqual(this.end, otherLine.end);
-    return isSameType && startEqual && endEqual;
+  isEqualTo(other) {
+    if (other === this) return true;
+    if (!(other instanceof Line)) return false;
+    return (
+      arePointsEqual(this.start, other.start) &&
+      arePointsEqual(this.end, other.end)
+    );
   }
 }
 
