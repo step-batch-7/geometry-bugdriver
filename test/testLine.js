@@ -35,4 +35,27 @@ describe("Line", () => {
       assert.strictEqual(actual, true);
     });
   });
+
+  describe("#length", () => {
+    it("should give length of line when x of startPoint smaller than endPoint", () => {
+      const line = new Line({ x: 6, y: 1 }, { x: 13, y: 1 });
+      assert.strictEqual(line.length, 7);
+    });
+    it("should give length of line when x of startPoint greater than endPoint", () => {
+      const line = new Line({ x: -4, y: -1 }, { x: -5, y: -1 });
+      assert.strictEqual(line.length, 1);
+    });
+    it("should give length of line when y of startPoint smaller than endPoint", () => {
+      const line = new Line({ x: 2, y: 3 }, { x: 5, y: 6 });
+      assert.approximately(line.length, 4.242641, 0.05);
+    });
+    it("should give length of line when y of startPoint greater than endPoint", () => {
+      const line = new Line({ x: 2, y: 7 }, { x: 3, y: 2 });
+      assert.approximately(line.length, 5.09902, 0.05);
+    });
+    it("should give length when line is starting from origin", () => {
+      const line = new Line({ x: 0, y: 0 }, { x: 5, y: 13 });
+      assert.approximately(line.length, 13.9283, 0.05);
+    });
+  });
 });
