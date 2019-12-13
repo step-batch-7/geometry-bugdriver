@@ -26,6 +26,10 @@ class Line {
       (this.end.x - this.start.x) ** 2 + (this.end.y - this.start.y) ** 2
     );
   }
+
+  get slope() {
+    return (this.end.y - this.start.y) / (this.end.x - this.start.x);
+  }
 }
 
 module.exports = Line;

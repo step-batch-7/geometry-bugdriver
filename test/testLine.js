@@ -58,4 +58,27 @@ describe("Line", () => {
       assert.approximately(line.length, 13.9283, 0.05);
     });
   });
+
+  describe("#slope", () => {
+    it("should give slope of line when x of startPoint smaller than endPoint", () => {
+      const line = new Line({ x: 6, y: 1 }, { x: 13, y: 1 });
+      assert.strictEqual(line.slope, 0);
+    });
+    it("should give slope of line when x of startPoint greater than endPoint", () => {
+      const line = new Line({ x: -4, y: -2 }, { x: -5, y: -1 });
+      assert.strictEqual(line.slope, -1);
+    });
+    it("should give slope of line when y of startPoint smaller than endPoint", () => {
+      const line = new Line({ x: 2, y: 3 }, { x: 5, y: 7 });
+      assert.approximately(line.slope, 1.3333333333333, 0.05);
+    });
+    it("should give slope of line when y of startPoint greater than endPoint", () => {
+      const line = new Line({ x: 2, y: 7 }, { x: 3, y: 2 });
+      assert.strictEqual(line.slope, -5);
+    });
+    it("should give slope of line when x of startPoint is equal to endPoint", () => {
+      const line = new Line({ x: 1, y: 2 }, { x: 1, y: 7 });
+      assert.strictEqual(line.slope, Infinity);
+    });
+  });
 });
