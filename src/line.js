@@ -9,13 +9,15 @@ class Line {
   }
 
   get length() {
-    return Math.sqrt(
-      (this.end.x - this.start.x) ** 2 + (this.end.y - this.start.y) ** 2
-    );
+    const diffOfX = this.end.x - this.start.x;
+    const diffOfY = this.end.y - this.start.y;
+    return Math.sqrt(diffOfX ** 2 + diffOfY ** 2);
   }
 
   get slope() {
-    return (this.end.y - this.start.y) / (this.end.x - this.start.x);
+    const diffOfX = this.end.x - this.start.x;
+    const diffOfY = this.end.y - this.start.y;
+    return diffOfY / diffOfX;
   }
 
   toString() {
