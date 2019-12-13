@@ -95,7 +95,7 @@ describe("Line", () => {
     });
     it("should check if same line instance is passed", () => {
       const line1 = new Line({ x: 10, y: 15 }, { x: 40, y: 31 });
-      assert.ok(line1.isParallelTo(line1));
+      assert.notOk(line1.isParallelTo(line1));
     });
     it("should state if instance of Line is not passed", () => {
       const line1 = new Line({ x: 10, y: 15 }, { x: 40, y: 31 });
