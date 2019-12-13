@@ -8,6 +8,16 @@ class Line {
     this.end = { x: end.x, y: end.y };
   }
 
+  get length() {
+    return Math.sqrt(
+      (this.end.x - this.start.x) ** 2 + (this.end.y - this.start.y) ** 2
+    );
+  }
+
+  get slope() {
+    return (this.end.y - this.start.y) / (this.end.x - this.start.x);
+  }
+
   toString() {
     return `Line{(${this.start.x},${this.start.y}),(${this.end.x},${this.end.y})}`;
   }
@@ -21,14 +31,10 @@ class Line {
     );
   }
 
-  get length() {
-    return Math.sqrt(
-      (this.end.x - this.start.x) ** 2 + (this.end.y - this.start.y) ** 2
-    );
-  }
-
-  get slope() {
-    return (this.end.y - this.start.y) / (this.end.x - this.start.x);
+  isParallelTo(other) {
+    if (other === this) return true;
+    if (!(other instanceof Line)) return false;
+    return this.slope == other.slope;
   }
 }
 

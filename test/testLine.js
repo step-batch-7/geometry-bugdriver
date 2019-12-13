@@ -81,4 +81,26 @@ describe("Line", () => {
       assert.strictEqual(line.slope, Infinity);
     });
   });
+
+  describe("#isParallelTo", () => {
+    it("should check if two line are paralled", () => {
+      const line1 = new Line({ x: 10, y: 15 }, { x: 40, y: 30 });
+      const line2 = new Line({ x: 15, y: 8 }, { x: 49, y: 25 });
+      assert.ok(line1.isParallelTo(line2));
+    });
+    it("should check if two line are not paralled", () => {
+      const line1 = new Line({ x: 10, y: 15 }, { x: 40, y: 31 });
+      const line2 = new Line({ x: 15, y: 9 }, { x: 49, y: 25 });
+      assert.notOk(line1.isParallelTo(line2));
+    });
+    it("should check if same line instance is passed", () => {
+      const line1 = new Line({ x: 10, y: 15 }, { x: 40, y: 31 });
+      assert.ok(line1.isParallelTo(line1));
+    });
+    it("should state if instance of Line is not passed", () => {
+      const line1 = new Line({ x: 10, y: 15 }, { x: 40, y: 31 });
+      const line2 = { start: { x: 1, y: 2 }, end: { x: 2, y: 3 } };
+      assert.notOk(line1.isParallelTo(line2));
+    });
+  });
 });
