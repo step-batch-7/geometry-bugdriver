@@ -11,15 +11,24 @@ describe("Point", () => {
   });
 
   describe("#visit", () => {
-    it("should give add when addition function passed", () => {
+    it("should give add when addition of coordinates function passed", () => {
       const point = new Point(2, 3);
       const actual = point.visit((x, y) => x + y);
       assert.strictEqual(actual, 5);
     });
-    it("should give multiply when multiply function passed", () => {
+    it("should give multiplication of coordinates when multiply function passed", () => {
       const point = new Point(2, 3);
       const actual = point.visit((x, y) => x * y);
       assert.strictEqual(actual, 6);
+    });
+  });
+
+  describe("#clone", () => {
+    it("should give instance of Point with same value of fields", () => {
+      const point = new Point(2, 3);
+      const actual = point.clone();
+      assert.ok(actual instanceof Point);
+      assert.deepStrictEqual(point, actual);
     });
   });
 });

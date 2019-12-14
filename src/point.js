@@ -6,8 +6,13 @@ class Point {
   toString() {
     return `[Point @(${this.x},${this.y})]`;
   }
+
   visit(visitFunc) {
     return visitFunc(this.x, this.y);
+  }
+
+  clone() {
+    return new Point(this.x, this.y);
   }
 }
 
