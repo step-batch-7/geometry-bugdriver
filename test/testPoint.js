@@ -47,5 +47,10 @@ describe("Point", () => {
       const point = new Point(2, 3);
       assert.ok(point.isEqualTo(point));
     });
+    it("should determine Point instance is not passed", () => {
+      const point = new Point(2, 3);
+      const other = { x: 2, y: 3 };
+      assert.notOk(point.isEqualTo(other));
+    });
   });
 });
