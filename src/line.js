@@ -40,6 +40,10 @@ class Line {
   }
 
   findY(x) {
+    const [lowerX, higherX] = [this.start.x, this.end.x].sort();
+    if (x < lowerX || x > higherX) {
+      return NaN;
+    }
     const dx = this.start.x - x;
     return this.slope * dx + this.start.y;
   }

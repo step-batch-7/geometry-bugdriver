@@ -105,9 +105,13 @@ describe("Line", () => {
   });
 
   describe("#findY", () => {
-    it("should give x cordinate for given y on a line", () => {
+    it("should give x cordinate for given y on line", () => {
       const line = new Line({ x: 2, y: 2 }, { x: 7, y: 2 });
       assert.strictEqual(line.findY(6), 2);
+    });
+    it("should give NaN if cordinate for given y is not on line", () => {
+      const line = new Line({ x: 2, y: 2 }, { x: 7, y: 2 });
+      assert.isNaN(line.findY(9));
     });
   });
 });
