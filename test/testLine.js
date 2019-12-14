@@ -118,6 +118,7 @@ describe("Line", () => {
       assert.isNaN(line.findY(9));
     });
   });
+
   describe("#findX", () => {
     it("should give y cordinate for given x on vertical line", () => {
       const line = new Line({ x: 2, y: 2 }, { x: 2, y: 7 });
@@ -130,6 +131,30 @@ describe("Line", () => {
     it("should give NaN if cordinate for given x is not on line", () => {
       const line = new Line({ x: 2, y: 2 }, { x: 2, y: 7 });
       assert.isNaN(line.findX(9));
+    });
+  });
+
+  describe("#split", () => {
+    it("should give two half equal lines split from center", () => {
+      const line = new Line({ x: 2, y: 2 }, { x: 8, y: 2 });
+      const expected = [
+        new Line({ x: 2, y: 2 }, { x: 5, y: 2 }),
+        new Line({ x: 5, y: 2 }, { x: 8, y: 2 }),
+      ];
+      const actual = line.split();
+      assert.ok(expected[0].isEqualTo(actual[0]));
+      assert.ok(expected[1].isEqualTo(actual[1]));
+    });
+
+    it("should give two half equal lines split from center", () => {
+      const line = new Line({ x: 2, y: 2 }, { x: 8, y: 2 });
+      const expected = [
+        new Line({ x: 2, y: 2 }, { x: 5, y: 2 }),
+        new Line({ x: 5, y: 2 }, { x: 8, y: 2 }),
+      ];
+      const actual = line.split();
+      assert.ok(expected[0].isEqualTo(actual[0]));
+      assert.ok(expected[1].isEqualTo(actual[1]));
     });
   });
 });

@@ -47,6 +47,7 @@ class Line {
     const dx = this.start.x - x;
     return this.slope * dx + this.start.y;
   }
+
   findX(y) {
     const [lowerY, higherY] = [this.start.y, this.end.y].sort();
     if (y < lowerY || y > higherY) return NaN;
@@ -54,6 +55,14 @@ class Line {
 
     const dy = this.start.y - y;
     return this.start.x + dy / this.slope;
+  }
+
+  split() {
+    const midPoint = {
+      x: (this.start.x + this.end.x) / 2,
+      y: (this.start.y + this.end.y) / 2,
+    };
+    return [new Line(this.start, midPoint), new Line(midPoint, this.end)];
   }
 }
 
