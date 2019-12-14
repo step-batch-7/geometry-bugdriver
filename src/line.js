@@ -38,6 +38,11 @@ class Line {
     if (!(other instanceof Line)) return false;
     return this.slope == other.slope;
   }
+
+  findY(x) {
+    const dx = this.start.x - x;
+    return this.slope * dx + this.start.y;
+  }
 }
 
 module.exports = Line;

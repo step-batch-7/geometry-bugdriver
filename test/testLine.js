@@ -103,4 +103,11 @@ describe("Line", () => {
       assert.notOk(line1.isParallelTo(line2));
     });
   });
+
+  describe("#findY", () => {
+    it("should give x cordinate for given y on a line", () => {
+      const line = new Line({ x: 2, y: 2 }, { x: 7, y: 2 });
+      assert.strictEqual(line.findY(6), 2);
+    });
+  });
 });
