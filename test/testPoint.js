@@ -31,4 +31,21 @@ describe("Point", () => {
       assert.deepStrictEqual(point, actual);
     });
   });
+
+  describe("#isEqualTo", () => {
+    it("should determine if given object is equal", () => {
+      const point = new Point(2, 3);
+      const point1 = new Point(2, 3);
+      assert.ok(point.isEqualTo(point, point1));
+    });
+    it("should determine if given object is not equal", () => {
+      const point = new Point(2, 3);
+      const point1 = new Point(2, 4);
+      assert.notOk(point.isEqualTo(point1));
+    });
+    it("should determine if itself is passed", () => {
+      const point = new Point(2, 3);
+      assert.ok(point.isEqualTo(point));
+    });
+  });
 });
