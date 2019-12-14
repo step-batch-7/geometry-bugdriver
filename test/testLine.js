@@ -5,7 +5,7 @@ describe("Line", () => {
   describe("#toString", () => {
     it("should give representation of line Object", () => {
       const line = new Line({ x: 2, y: 5 }, { x: 6, y: 5 });
-      const expected = "Line{(2,5),(6,5)}";
+      const expected = "[Line (2,5) to (6,5)]";
       assert.strictEqual(line.toString(), expected);
     });
   });
