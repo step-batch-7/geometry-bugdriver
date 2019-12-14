@@ -41,11 +41,19 @@ class Line {
 
   findY(x) {
     const [lowerX, higherX] = [this.start.x, this.end.x].sort();
-    if (x < lowerX || x > higherX) {
-      return NaN;
-    }
+    if (x < lowerX || x > higherX) return NaN;
+    if (lowerX == higherX) return this.start.y;
+
     const dx = this.start.x - x;
     return this.slope * dx + this.start.y;
+  }
+  findX(y) {
+    const [lowerY, higherY] = [this.start.y, this.end.y].sort();
+    if (y < lowerY || y > higherY) return NaN;
+    if (lowerY == higherY) return this.start.x;
+
+    const dy = this.start.y - y;
+    return this.start.x + dy / this.slope;
   }
 }
 

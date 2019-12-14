@@ -105,13 +105,31 @@ describe("Line", () => {
   });
 
   describe("#findY", () => {
-    it("should give x cordinate for given y on line", () => {
+    it("should give x cordinate for given y on horizontal line", () => {
       const line = new Line({ x: 2, y: 2 }, { x: 7, y: 2 });
       assert.strictEqual(line.findY(6), 2);
+    });
+    it("should give x cordinate for given y on vertical line", () => {
+      const line = new Line({ x: 2, y: 3 }, { x: 2, y: 7 });
+      assert.strictEqual(line.findY(2), 3);
     });
     it("should give NaN if cordinate for given y is not on line", () => {
       const line = new Line({ x: 2, y: 2 }, { x: 7, y: 2 });
       assert.isNaN(line.findY(9));
+    });
+  });
+  describe("#findX", () => {
+    it("should give y cordinate for given x on vertical line", () => {
+      const line = new Line({ x: 2, y: 2 }, { x: 2, y: 7 });
+      assert.strictEqual(line.findX(6), 2);
+    });
+    it("should give y cordinate for given x on horizontal line", () => {
+      const line = new Line({ x: 2, y: 2 }, { x: 7, y: 2 });
+      assert.strictEqual(line.findX(2), 2);
+    });
+    it("should give NaN if cordinate for given x is not on line", () => {
+      const line = new Line({ x: 2, y: 2 }, { x: 2, y: 7 });
+      assert.isNaN(line.findX(9));
     });
   });
 });
