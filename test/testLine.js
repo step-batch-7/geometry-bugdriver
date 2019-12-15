@@ -94,6 +94,11 @@ describe("Line", () => {
       const line2 = new Line({ x: 15, y: 9 }, { x: 49, y: 25 });
       assert.notOk(line1.isParallelTo(line2));
     });
+    it("should check if two line are Collinear", () => {
+      const line1 = new Line({ x: 10, y: 15 }, { x: 40, y: 15 });
+      const line2 = new Line({ x: 15, y: 15 }, { x: 49, y: 15 });
+      assert.notOk(line1.isParallelTo(line2));
+    });
     it("should check if same line instance is passed", () => {
       const line1 = new Line({ x: 10, y: 15 }, { x: 40, y: 31 });
       assert.notOk(line1.isParallelTo(line1));
@@ -140,7 +145,7 @@ describe("Line", () => {
       const line = new Line({ x: 2, y: 2 }, { x: 7, y: 2 });
       const expected = [
         new Line({ x: 2, y: 2 }, { x: 4.5, y: 2 }),
-        new Line({ x: 4.5, y: 2 }, { x: 7, y: 2 }),
+        new Line({ x: 4.5, y: 2 }, { x: 7, y: 2 })
       ];
       const actual = line.split();
       assert.ok(expected[0].isEqualTo(actual[0]));
@@ -151,7 +156,7 @@ describe("Line", () => {
       const line = new Line({ x: -2, y: -2 }, { x: -8, y: -2 });
       const expected = [
         new Line({ x: -2, y: -2 }, { x: -5, y: -2 }),
-        new Line({ x: -5, y: -2 }, { x: -8, y: -2 }),
+        new Line({ x: -5, y: -2 }, { x: -8, y: -2 })
       ];
       const actual = line.split();
       assert.ok(expected[0].isEqualTo(actual[0]));
@@ -170,10 +175,10 @@ describe("Line", () => {
       const line = new Line({ x: 2, y: 5 }, { x: 2, y: 9 });
       assert.notOk(line.hasPoint(point));
     });
-    it("should state if instance of point is not passed",()=>{
+    it("should state if instance of point is not passed", () => {
       const p = { x: 2, y: 7 };
       const line = new Line({ x: 2, y: 5 }, { x: 2, y: 9 });
       assert.notOk(line.hasPoint(p));
-    })
+    });
   });
 });

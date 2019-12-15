@@ -5,15 +5,21 @@ const arePointsEqual = function(pointA, pointB) {
 };
 
 const isNumberInRange = function(range, number) {
-  const [min, max] = range.sort((a,b)=>a-b);
+  const [min, max] = range.sort((a, b) => a - b);
   return number < min || number > max;
 };
 
-const distance = function(point1,point2){
+const distance = function(point1, point2) {
   const dx = point2.x - point1.x;
   const dy = point2.y - point1.y;
   return Math.sqrt(dx ** 2 + dy ** 2);
-}
+};
+
+const isNotCollinear = function(point1, point2, point3) {
+  const line1 = new Line(point1, point2);
+  const line2 = new Line(point2, point3);
+  return line1.slope != line2.slope;
+};
 
 class Line {
   constructor(start, end) {
@@ -22,15 +28,15 @@ class Line {
   }
 
   get length() {
-    const diffOfX = this.end.x - this.start.x;
-    const diffOfY = this.end.y - this.start.y;
-    return Math.sqrt(diffOfX ** 2 + diffOfY ** 2);
+    const dx = this.end.x - this.start.x;
+    const dy = this.end.y - this.start.y;
+    return Math.sqrt(dx ** 2 + dy ** 2);
   }
 
   get slope() {
-    const diffOfX = this.end.x - this.start.x;
-    const diffOfY = this.end.y - this.start.y;
-    return diffOfY / diffOfX;
+    const dx = this.end.x - this.start.x;
+    const dy = this.end.y - this.start.y;
+    return dy / dx;
   }
 
   toString() {
@@ -49,7 +55,10 @@ class Line {
   isParallelTo(other) {
     if (other === this) return false;
     if (!(other instanceof Line)) return false;
-    return this.slope == other.slope;
+    return (
+      this.slope == other.slope &&
+      isNotCollinear(this.start, this.end, other.start)
+    );
   }
 
   findY(x) {
@@ -71,14 +80,16 @@ class Line {
   split() {
     const midPoint = {
       x: (this.start.x + this.end.x) / 2,
-      y: (this.start.y + this.end.y) / 2,
+      y: (this.start.y + this.end.y) / 2
     };
     return [new Line(this.start, midPoint), new Line(midPoint, this.end)];
   }
 
   hasPoint(point) {
-    if(!(point instanceof Point)) return false;
-    return distance(this.start,point) + distance(point,this.end) == this.length;
+    if (!(point instanceof Point)) return false;
+    return (
+      distance(this.start, point) + distance(point, this.end) == this.length
+    );
   }
 }
 
