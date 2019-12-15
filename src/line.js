@@ -1,6 +1,19 @@
+const Point = require("./point");
+
 const arePointsEqual = function(pointA, pointB) {
   return pointA.x == pointB.x && pointA.y == pointB.y;
 };
+
+const isNumberInRange = function(range, number) {
+  const [min, max] = range.sort((a,b)=>a-b);
+  return number < min || number > max;
+};
+
+const distance = function(point1,point2){
+  const dx = point2.x - point1.x;
+  const dy = point2.y - point1.y;
+  return Math.sqrt(dx ** 2 + dy ** 2);
+}
 
 class Line {
   constructor(start, end) {
@@ -40,18 +53,16 @@ class Line {
   }
 
   findY(x) {
-    const [lowerX, higherX] = [this.start.x, this.end.x].sort();
-    if (x < lowerX || x > higherX) return NaN;
-    if (lowerX == higherX) return this.start.y;
+    if (isNumberInRange([this.start.x, this.end.x], x)) return NaN;
+    if (this.start.x == this.end.x) return this.start.y;
 
     const dx = this.start.x - x;
     return this.slope * dx + this.start.y;
   }
 
   findX(y) {
-    const [lowerY, higherY] = [this.start.y, this.end.y].sort();
-    if (y < lowerY || y > higherY) return NaN;
-    if (lowerY == higherY) return this.start.x;
+    if (isNumberInRange([this.start.y, this.end.y], y)) return NaN;
+    if (this.start.y == this.end.y) return this.start.x;
 
     const dy = this.start.y - y;
     return this.start.x + dy / this.slope;
@@ -63,6 +74,11 @@ class Line {
       y: (this.start.y + this.end.y) / 2,
     };
     return [new Line(this.start, midPoint), new Line(midPoint, this.end)];
+  }
+
+  hasPoint(point) {
+    if(!(point instanceof Point)) return false;
+    return distance(this.start,point) + distance(point,this.end) == this.length;
   }
 }
 

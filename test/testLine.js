@@ -1,5 +1,6 @@
 const assert = require("chai").assert;
 const Line = require("../src/line");
+const Point = require("../src/point");
 
 describe("Line", () => {
   describe("#toString", () => {
@@ -83,12 +84,12 @@ describe("Line", () => {
   });
 
   describe("#isParallelTo", () => {
-    it("should check if two line are paralled", () => {
+    it("should check if two line are parallel", () => {
       const line1 = new Line({ x: 10, y: 15 }, { x: 40, y: 30 });
       const line2 = new Line({ x: 15, y: 8 }, { x: 49, y: 25 });
       assert.ok(line1.isParallelTo(line2));
     });
-    it("should check if two line are not paralled", () => {
+    it("should check if two line are not parallel", () => {
       const line1 = new Line({ x: 10, y: 15 }, { x: 40, y: 31 });
       const line2 = new Line({ x: 15, y: 9 }, { x: 49, y: 25 });
       assert.notOk(line1.isParallelTo(line2));
@@ -156,5 +157,23 @@ describe("Line", () => {
       assert.ok(expected[0].isEqualTo(actual[0]));
       assert.ok(expected[1].isEqualTo(actual[1]));
     });
+  });
+
+  describe("#hasPoint", () => {
+    it("should state if point lies on line", () => {
+      const point = new Point(2, 7);
+      const line = new Line({ x: 2, y: 5 }, { x: 2, y: 9 });
+      assert.ok(line.hasPoint(point));
+    });
+    it("should state if point does not lie on line", () => {
+      const point = new Point(4, 7);
+      const line = new Line({ x: 2, y: 5 }, { x: 2, y: 9 });
+      assert.notOk(line.hasPoint(point));
+    });
+    it("should state if instance of point is not passed",()=>{
+      const p = { x: 2, y: 7 };
+      const line = new Line({ x: 2, y: 5 }, { x: 2, y: 9 });
+      assert.notOk(line.hasPoint(p));
+    })
   });
 });
