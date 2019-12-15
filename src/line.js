@@ -15,10 +15,10 @@ const distance = function(point1, point2) {
   return Math.sqrt(dx ** 2 + dy ** 2);
 };
 
-const isNotCollinear = function(point1, point2, point3) {
+const areCollinear = function(point1, point2, point3) {
   const line1 = new Line(point1, point2);
   const line2 = new Line(point2, point3);
-  return line1.slope != line2.slope;
+  return line1.slope == line2.slope;
 };
 
 class Line {
@@ -53,12 +53,9 @@ class Line {
   }
 
   isParallelTo(other) {
-    if (other === this) return false;
-    if (!(other instanceof Line)) return false;
-    return (
-      this.slope == other.slope &&
-      isNotCollinear(this.start, this.end, other.start)
-    );
+    if (!(other instanceof Line) || this === other) return false;
+    if (areCollinear(this.start, this.end, other.start)) return false;
+    return this.slope == other.slope;
   }
 
   findY(x) {
