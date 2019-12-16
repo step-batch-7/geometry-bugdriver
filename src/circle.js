@@ -8,6 +8,11 @@ class Circle {
   toString() {
     return `[Circle @(${this.center.x},${this.center.y}) radius ${this.radius}]`;
   }
+  isEqualTo(other) {
+    if (other === this) return true;
+    if (!(other instanceof Circle)) return false;
+    return this.center.isEqualTo(other.center) && this.radius == other.radius;
+  }
 }
 
 module.exports = Circle;
