@@ -53,4 +53,26 @@ describe("Point", () => {
       assert.notOk(point.isEqualTo(other));
     });
   });
+
+  describe("#findDistanceTo", () => {
+    it("should give distance between two points having positive coordinates", () => {
+      const point1 = new Point(6, 1);
+      const point2 = new Point(13, 1);
+      assert.equal(point1.findDistanceTo(point2), 7);
+    });
+    it("should give distance between two points having negetive coordinates", () => {
+      const point1 = new Point(-4, -1);
+      const point2 = new Point(-5, -1);
+      assert.equal(point1.findDistanceTo(point2), 1);
+    });
+    it("should give NaN if Point instance is not passed", () => {
+      const point = new Point(6, 1);
+      const p = { x: 13, y: 1 };
+      assert.isNaN(point.findDistanceTo(p));
+    });
+    it("should give 0 if same instance is passed", () => {
+      const point = new Point(6, 1);
+      assert.equal(point.findDistanceTo(point), 0);
+    });
+  });
 });

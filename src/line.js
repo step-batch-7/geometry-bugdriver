@@ -4,21 +4,15 @@ const arePointsEqual = function(pointA, pointB) {
   return pointA.x == pointB.x && pointA.y == pointB.y;
 };
 
-const isNumberInRange = function(range, number) {
+const isNumberNotInRange = function(range, number) {
   const [min, max] = range.sort((a, b) => a - b);
   return number < min || number > max;
-};
-
-const distance = function(point1, point2) {
-  const dx = point2.x - point1.x;
-  const dy = point2.y - point1.y;
-  return Math.sqrt(dx ** 2 + dy ** 2);
 };
 
 const areCollinear = function(point1, point2, point3) {
   const line1 = new Line(point1, point2);
   const line2 = new Line(point2, point3);
-  return line1.slope == line2.slope;
+  return line1.slope === line2.slope;
 };
 
 class Line {
@@ -59,7 +53,7 @@ class Line {
   }
 
   findY(x) {
-    if (isNumberInRange([this.start.x, this.end.x], x)) return NaN;
+    if (isNumberNotInRange([this.start.x, this.end.x], x)) return NaN;
     if (this.start.x == this.end.x) return this.start.y;
 
     const dx = this.start.x - x;
@@ -67,7 +61,7 @@ class Line {
   }
 
   findX(y) {
-    if (isNumberInRange([this.start.y, this.end.y], y)) return NaN;
+    if (isNumberNotInRange([this.start.y, this.end.y], y)) return NaN;
     if (this.start.y == this.end.y) return this.start.x;
 
     const dy = this.start.y - y;
@@ -84,9 +78,9 @@ class Line {
 
   hasPoint(point) {
     if (!(point instanceof Point)) return false;
-    return (
-      distance(this.start, point) + distance(point, this.end) == this.length
-    );
+    const line1 = new Line(this.start, point);
+    const line2 = new Line(point, this.end);
+    return line1.length + line2.length == this.length;
   }
 }
 

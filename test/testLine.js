@@ -145,7 +145,7 @@ describe("Line", () => {
       const line = new Line({ x: 2, y: 2 }, { x: 7, y: 2 });
       const expected = [
         new Line({ x: 2, y: 2 }, { x: 4.5, y: 2 }),
-        new Line({ x: 4.5, y: 2 }, { x: 7, y: 2 })
+        new Line({ x: 4.5, y: 2 }, { x: 7, y: 2 }),
       ];
       const actual = line.split();
       assert.ok(expected[0].isEqualTo(actual[0]));
@@ -156,7 +156,7 @@ describe("Line", () => {
       const line = new Line({ x: -2, y: -2 }, { x: -8, y: -2 });
       const expected = [
         new Line({ x: -2, y: -2 }, { x: -5, y: -2 }),
-        new Line({ x: -5, y: -2 }, { x: -8, y: -2 })
+        new Line({ x: -5, y: -2 }, { x: -8, y: -2 }),
       ];
       const actual = line.split();
       assert.ok(expected[0].isEqualTo(actual[0]));

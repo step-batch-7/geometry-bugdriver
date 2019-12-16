@@ -20,6 +20,14 @@ class Point {
     if (!(other instanceof Point)) return false;
     return this.x == other.x && this.y == other.y;
   }
+
+  findDistanceTo(point) {
+    if (!(point instanceof Point)) return NaN;
+    if (this == point) return 0;
+    const dx = point.x - this.x;
+    const dy = point.y - this.y;
+    return Math.sqrt(dx ** 2 + dy ** 2);
+  }
 }
 
 module.exports = Point;
