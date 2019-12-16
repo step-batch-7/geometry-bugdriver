@@ -1,9 +1,5 @@
 const Point = require("./point");
 
-const arePointsEqual = function(pointA, pointB) {
-  return pointA.x == pointB.x && pointA.y == pointB.y;
-};
-
 const isNumberNotInRange = function(range, number) {
   const [min, max] = range.sort((a, b) => a - b);
   return number < min || number > max;
@@ -17,14 +13,12 @@ const areCollinear = function(point1, point2, point3) {
 
 class Line {
   constructor(start, end) {
-    this.start = { x: start.x, y: start.y };
-    this.end = { x: end.x, y: end.y };
+    this.start = new Point(start.x, start.y);
+    this.end = new Point(end.x, end.y);
   }
 
   get length() {
-    const dx = this.end.x - this.start.x;
-    const dy = this.end.y - this.start.y;
-    return Math.sqrt(dx ** 2 + dy ** 2);
+    return this.start.findDistanceTo(this.end);
   }
 
   get slope() {
@@ -40,10 +34,7 @@ class Line {
   isEqualTo(other) {
     if (other === this) return true;
     if (!(other instanceof Line)) return false;
-    return (
-      arePointsEqual(this.start, other.start) &&
-      arePointsEqual(this.end, other.end)
-    );
+    return this.start.isEqualTo(other.start) && this.end.isEqualTo(other.end);
   }
 
   isParallelTo(other) {
@@ -84,9 +75,7 @@ class Line {
   }
 
   findPointFromStart(distance) {
-    if (!Number.isInteger(distance) || distance < 0 || distance > this.length) {
-      return null;
-    }
+    if (distance < 0 || distance > this.length) return null;
     const ratio = distance / this.length;
     const x = (1 - ratio) * this.start.x + ratio * this.end.x;
     const y = (1 - ratio) * this.start.y + ratio * this.end.y;
