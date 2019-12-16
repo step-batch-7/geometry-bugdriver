@@ -143,6 +143,12 @@ describe("Line", () => {
       const line = new Line({ x: 2, y: 2 }, { x: 2, y: 7 });
       assert.isNaN(line.findX(9));
     });
+    it("should give x value for the given y if the y value has a corresponding x value on line", () => {
+      const line = new Line({ x: -1, y: 3 }, { x: 3, y: -1 });
+      const actualValue = line.findX(1);
+      const expectedValue = 1;
+      assert.strictEqual(actualValue, expectedValue);
+    });
   });
 
   describe("#split", () => {

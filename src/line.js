@@ -50,16 +50,16 @@ class Line {
     if (isNumberNotInRange([this.start.x, this.end.x], x)) return NaN;
     if (this.start.x == this.end.x) return this.start.y;
 
-    const dx = this.start.x - x;
-    return this.slope * dx + this.start.y;
+    const dx = x - this.start.x;
+    return dx * this.slope + this.start.y;
   }
 
   findX(y) {
     if (isNumberNotInRange([this.start.y, this.end.y], y)) return NaN;
     if (this.start.y == this.end.y) return this.start.x;
 
-    const dy = this.start.y - y;
-    return this.start.x + dy / this.slope;
+    const dy = y - this.start.y;
+    return dy / this.slope + this.start.x;
   }
 
   split() {
