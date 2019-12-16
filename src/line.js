@@ -34,7 +34,10 @@ class Line {
   isEqualTo(other) {
     if (other === this) return true;
     if (!(other instanceof Line)) return false;
-    return this.start.isEqualTo(other.start) && this.end.isEqualTo(other.end);
+    return (
+      (this.start.isEqualTo(other.start) && this.end.isEqualTo(other.end)) ||
+      (this.start.isEqualTo(other.end) && this.end.isEqualTo(other.start))
+    );
   }
 
   isParallelTo(other) {

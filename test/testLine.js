@@ -35,6 +35,11 @@ describe("Line", () => {
       const actual = line1.isEqualTo(line1);
       assert.strictEqual(actual, true);
     });
+    it("should check if oposite lines are passed", () => {
+      const line1 = new Line({ x: 1, y: 2 }, { x: 2, y: 1 });
+      const line2 = new Line({ x: 2, y: 1 }, { x: 1, y: 2 });
+      assert.ok(line1.isEqualTo(line2));
+    });
   });
 
   describe("#length", () => {
