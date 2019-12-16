@@ -31,4 +31,11 @@ describe("#Circle", () => {
       assert.ok(circle.isEqualTo(circle));
     });
   });
+
+  describe("#area", () => {
+    it("should give area of given circle when center cordinates are positive", () => {
+      const circle = new Circle({ x: 1, y: 2 }, 5);
+      assert.approximately(circle.area, 78.5, 0.05);
+    });
+  });
 });
