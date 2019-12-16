@@ -38,4 +38,11 @@ describe("#Circle", () => {
       assert.approximately(circle.area, 78.5, 0.05);
     });
   });
+
+  describe("#perimeter", () => {
+    it("should give area of given circle when center cordinates are positive", () => {
+      const circle = new Circle({ x: 1, y: 2 }, 5);
+      assert.approximately(circle.perimeter, 31.42, 0.05);
+    });
+  });
 });
