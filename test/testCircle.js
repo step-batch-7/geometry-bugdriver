@@ -1,5 +1,6 @@
 const assert = require("chai").assert;
 const Circle = require("../src/circle");
+const Point = require("../src/point");
 
 describe("#Circle", () => {
   describe("#toString", () => {
@@ -43,6 +44,19 @@ describe("#Circle", () => {
     it("should give area of given circle when center cordinates are positive", () => {
       const circle = new Circle({ x: 1, y: 2 }, 5);
       assert.approximately(circle.perimeter, 31.42, 0.05);
+    });
+  });
+
+  describe("#hasPoint", () => {
+    it("should check if point passed is on circle", () => {
+      const circle = new Circle({ x: 6, y: 1 }, 7);
+      const point = new Point(13, 1);
+      assert.ok(circle.hasPoint(point));
+    });
+    it("should check if point passed is not on circle", () => {
+      const circle = new Circle({ x: 6, y: 2 }, 7);
+      const point = new Point(13, 1);
+      assert.notOk(circle.hasPoint(point));
     });
   });
 });
