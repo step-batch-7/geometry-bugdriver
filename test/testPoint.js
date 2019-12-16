@@ -1,5 +1,6 @@
 const assert = require("chai").assert;
 const Point = require("../src/point");
+const Line = require("../src/line");
 
 describe("Point", () => {
   describe("#toString", () => {
@@ -73,6 +74,19 @@ describe("Point", () => {
     it("should give 0 if same instance is passed", () => {
       const point = new Point(6, 1);
       assert.equal(point.findDistanceTo(point), 0);
+    });
+  });
+
+  describe("#isOn", () => {
+    it("should check if point is on line", () => {
+      const point = new Point(2, 7);
+      const line = new Line({ x: 2, y: 5 }, { x: 2, y: 9 });
+      assert.ok(point.isOn(line));
+    });
+    it("should state if point does not lie on line", () => {
+      const point = new Point(4, 7);
+      const line = new Line({ x: 2, y: 5 }, { x: 2, y: 9 });
+      assert.notOk(point.isOn(line));
     });
   });
 });
