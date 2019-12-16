@@ -7,8 +7,8 @@ class Point {
     return `[Point @(${this.x},${this.y})]`;
   }
 
-  visit(visitFunc) {
-    return visitFunc(this.x, this.y);
+  visit(action) {
+    return action(this.x, this.y);
   }
 
   clone() {

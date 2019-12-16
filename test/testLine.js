@@ -199,4 +199,22 @@ describe("Line", () => {
       assert.isNull(line.findPointFromStart(9));
     });
   });
+
+  describe("#findPointFromEnd", () => {
+    it("should give point at given distance from start of line", () => {
+      const line = new Line({ x: 1, y: 1 }, { x: 6, y: 1 });
+      const expected = new Point(4, 1);
+      const actual = line.findPointFromEnd(2);
+      assert.approximately(actual.x, expected.x, 0.01);
+      assert.approximately(actual.y, expected.y, 0.01);
+    });
+    it("should give null if given distance is smaller than 0", () => {
+      const line = new Line({ x: 1, y: 1 }, { x: 6, y: 1 });
+      assert.isNull(line.findPointFromEnd(-1));
+    });
+    it("should give null if given distance is greater than line length", () => {
+      const line = new Line({ x: 1, y: 1 }, { x: 6, y: 1 });
+      assert.isNull(line.findPointFromEnd(9));
+    });
+  });
 });
