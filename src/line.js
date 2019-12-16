@@ -71,7 +71,7 @@ class Line {
   split() {
     const midPoint = {
       x: (this.start.x + this.end.x) / 2,
-      y: (this.start.y + this.end.y) / 2
+      y: (this.start.y + this.end.y) / 2,
     };
     return [new Line(this.start, midPoint), new Line(midPoint, this.end)];
   }
@@ -81,6 +81,16 @@ class Line {
     const line1 = new Line(this.start, point);
     const line2 = new Line(point, this.end);
     return line1.length + line2.length == this.length;
+  }
+
+  findPointFromStart(distance) {
+    if (!Number.isInteger(distance) || distance < 0 || distance > this.length) {
+      return null;
+    }
+    const ratio = distance / this.length;
+    const x = (1 - ratio) * this.start.x + ratio * this.end.x;
+    const y = (1 - ratio) * this.start.y + ratio * this.end.y;
+    return new Point(x, y);
   }
 }
 
