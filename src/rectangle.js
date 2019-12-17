@@ -22,6 +22,12 @@ class Rectangle {
       (this.pointa.findDistanceTo(pointb) + pointb.findDistanceTo(this.pointc))
     );
   }
+  get area() {
+    const pointb = new Point(this.pointc.x, this.pointa.y);
+    return (
+      this.pointa.findDistanceTo(pointb) * pointb.findDistanceTo(this.pointc)
+    );
+  }
 }
 
 module.exports = Rectangle;

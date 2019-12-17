@@ -42,4 +42,14 @@ describe("Rectangle", () => {
       assert.strictEqual(rectangle.perimeter, 28);
     });
   });
+  describe("#area", () => {
+    it("should give area of rectangle if diagonal is not parallel to x of y axis", () => {
+      const rectangle = new Rectangle({ x: 8, y: 10 }, { x: 22, y: 5 });
+      assert.strictEqual(rectangle.area, 70);
+    });
+    it("should give area of rectangle if diagonal is parallel to x of y axis", () => {
+      const rectangle = new Rectangle({ x: 8, y: 5 }, { x: 22, y: 5 });
+      assert.strictEqual(rectangle.area, 0);
+    });
+  });
 });
