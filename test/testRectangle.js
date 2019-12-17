@@ -113,5 +113,10 @@ describe("Rectangle", () => {
       const point = new Point(5, 5);
       assert.notOk(rectangle.covers(point));
     });
+    it("should check if given object is not instance of Point", () => {
+      const rectangle = new Rectangle({ x: 8, y: 13 }, { x: 33, y: 5 });
+      const point = { x: 5, y: 5 };
+      assert.notOk(rectangle.covers(point));
+    });
   });
 });
