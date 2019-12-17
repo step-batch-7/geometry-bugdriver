@@ -94,8 +94,13 @@ describe("Rectangle", () => {
 
   describe("#covers", () => {
     it("should check if given point is inside rectangle", () => {
-      const rectangle = new Rectangle({ x: 8, y: 13 }, { x: 33, y: 5 });
+      const rectangle = new Rectangle({ x: 1, y: 11 }, { x: 33, y: 5 });
       const point = new Point(20, 10);
+      assert.ok(rectangle.covers(point));
+    });
+    it("should check if given point is inside rectangle", () => {
+      const rectangle = new Rectangle({ x: 1, y: 1 }, { x: 5, y: 5 });
+      const point = new Point(1, 3);
       assert.ok(rectangle.covers(point));
     });
     it("should check if given point is on the rectangle", () => {
