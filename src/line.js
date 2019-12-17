@@ -6,9 +6,10 @@ const isNumberNotInRange = function(range, number) {
 };
 
 const areCollinear = function(point1, point2, point3) {
-  const line1 = new Line(point1, point2);
-  const line2 = new Line(point2, point3);
-  return line1.slope === line2.slope;
+  return (
+    (point2.y - point1.y) * (point3.x - point2.x) ===
+    (point3.y - point2.y) * (point2.x - point1.x)
+  );
 };
 
 class Line {
@@ -43,7 +44,7 @@ class Line {
   isParallelTo(other) {
     if (!(other instanceof Line) || this === other) return false;
     if (areCollinear(this.start, this.end, other.start)) return false;
-    return this.slope == other.slope;
+    return this.slope === other.slope;
   }
 
   findY(x) {
