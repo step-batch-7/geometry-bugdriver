@@ -35,11 +35,11 @@ class Rectangle {
   }
   hasPoint(point) {
     if (!(point instanceof Point)) return false;
-    const isOnAB = new Line(this.pointA, this.#pointB).hasPoint(point);
-    const isOnBC = new Line(this.#pointB, this.pointC).hasPoint(point);
-    const isOnCD = new Line(this.pointC, this.#pointD).hasPoint(point);
-    const isOnDA = new Line(this.#pointD, this.pointA).hasPoint(point);
-    return isOnAB || isOnBC || isOnCD || isOnDA;
+    const AB = new Line(this.pointA, this.#pointB);
+    const BC = new Line(this.#pointB, this.pointC);
+    const CD = new Line(this.pointC, this.#pointD);
+    const DA = new Line(this.#pointD, this.pointA);
+    return point.isOn(AB) || point.isOn(BC) || point.isOn(CD) || point.isOn(DA);
   }
 
   covers(point) {
