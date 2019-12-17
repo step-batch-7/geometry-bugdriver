@@ -58,5 +58,20 @@ describe("Circle", () => {
       const point = new Point(13, 1);
       assert.notOk(circle.hasPoint(point));
     });
+    it("should check if point instance passed", () => {
+      const circle = new Circle({ x: 6, y: 1 }, 7);
+      const point = { x: 13, y: 1 };
+      assert.notOk(circle.hasPoint(point));
+    });
+  });
+
+  describe("#moveTo", () => {
+    it("should move center of circle to given center", () => {
+      const circle = new Circle({ x: 1, y: 2 }, 5);
+      const expected = new Circle({ x: 2, y: 2 }, 5);
+      const actual = circle.moveTo({ x: 2, y: 2 });
+      assert.isOk(actual instanceof Circle);
+      assert.deepStrictEqual(actual, expected);
+    });
   });
 });
