@@ -41,6 +41,15 @@ class Rectangle {
     const isOnDA = new Line(this.#pointD, this.pointA).hasPoint(point);
     return isOnAB || isOnBC || isOnCD || isOnDA;
   }
+
+  covers(point) {
+    return (
+      point.x >= this.#pointD.x &&
+      point.x <= this.#pointB.x &&
+      point.y >= this.#pointD.y &&
+      point.y <= this.#pointB.y
+    );
+  }
 }
 
 module.exports = Rectangle;
