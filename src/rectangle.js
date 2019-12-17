@@ -7,8 +7,8 @@ class Rectangle {
   constructor(pointA, pointC) {
     this.pointA = new Point(pointA.x, pointA.y);
     this.pointC = new Point(pointC.x, pointC.y);
-    this.#pointB = new Point(this.pointC.x, this.pointA.y);
-    this.#pointD = new Point(this.pointA.x, this.pointC.y);
+    this.#pointB = new Point(pointC.x, pointA.y);
+    this.#pointD = new Point(pointA.x, pointC.y);
   }
   toString() {
     return `[Rectangle (${this.pointA.x},${this.pointA.y}) to (${this.pointC.x},${this.pointC.y})]`;
