@@ -74,7 +74,7 @@ class Line {
     if (!(point instanceof Point)) return false;
     const line1 = new Line(this.start, point);
     const line2 = new Line(point, this.end);
-    return line1.length + line2.length == this.length;
+    return +(line1.length + line2.length).toFixed(9) == +this.length.toFixed(9);
   }
 
   findPointFromStart(distance) {

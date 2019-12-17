@@ -181,6 +181,11 @@ describe("Line", () => {
       const line = new Line({ x: 2, y: 5 }, { x: 2, y: 9 });
       assert.ok(line.hasPoint(point));
     });
+    it("should validate if given points are on the line", () => {
+      const point = new Point(2, 2);
+      const line = new Line({ x: 1, y: 1 }, { x: 5, y: 5 });
+      assert.isTrue(line.hasPoint(point));
+    });
     it("should state if point does not lie on line", () => {
       const point = new Point(4, 7);
       const line = new Line({ x: 2, y: 5 }, { x: 2, y: 9 });
