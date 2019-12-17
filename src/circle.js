@@ -20,6 +20,7 @@ class Circle {
     return 2 * Math.PI * this.radius;
   }
   hasPoint(point) {
+    if (!(point instanceof Point)) return false;
     return this.radius == point.findDistanceTo(this.center);
   }
 }
