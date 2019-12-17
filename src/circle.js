@@ -24,8 +24,11 @@ class Circle {
     return this.radius == point.findDistanceTo(this.center);
   }
   moveTo(center) {
-    const centerPoint = new Point(center.x, center.y);
-    return new Circle(centerPoint, this.radius);
+    return new Circle({ x: center.x, y: center.y }, this.radius);
+  }
+  covers(point) {
+    if (!(point instanceof Point)) return false;
+    return point.findDistanceTo(this.center) <= this.radius;
   }
 }
 

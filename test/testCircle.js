@@ -81,4 +81,22 @@ describe("Circle", () => {
       assert.deepStrictEqual(actual, expected);
     });
   });
+
+  describe("#covers", () => {
+    it("should check if point passed is in circle", () => {
+      const circle = new Circle({ x: 6, y: 1 }, 7);
+      const point = new Point(6, 3);
+      assert.ok(circle.covers(point));
+    });
+    it("should check if point passed is not in circle", () => {
+      const circle = new Circle({ x: 6, y: 2 }, 7);
+      const point = new Point(13, 1);
+      assert.notOk(circle.covers(point));
+    });
+    it("should check if point instance passed", () => {
+      const circle = new Circle({ x: 6, y: 1 }, 7);
+      const point = { x: 13, y: 1 };
+      assert.notOk(circle.covers(point));
+    });
+  });
 });
