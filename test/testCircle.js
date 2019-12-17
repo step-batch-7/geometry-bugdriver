@@ -73,5 +73,12 @@ describe("Circle", () => {
       assert.isOk(actual instanceof Circle);
       assert.deepStrictEqual(actual, expected);
     });
+    it("should give circle if same center is passed", () => {
+      const circle = new Circle({ x: 1, y: 2 }, 5);
+      const expected = new Circle({ x: 1, y: 2 }, 5);
+      const actual = circle.moveTo({ x: 1, y: 2 });
+      assert.isOk(actual instanceof Circle);
+      assert.deepStrictEqual(actual, expected);
+    });
   });
 });
