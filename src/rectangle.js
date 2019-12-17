@@ -21,17 +21,14 @@ class Rectangle {
     );
   }
   get perimeter() {
-    return (
-      2 *
-      (this.pointA.findDistanceTo(this.#pointB) +
-        this.#pointB.findDistanceTo(this.pointC))
-    );
+    const length = this.pointA.findDistanceTo(this.#pointB);
+    const width = this.#pointB.findDistanceTo(this.pointC);
+    return 2 * (length + width);
   }
   get area() {
-    return (
-      this.pointA.findDistanceTo(this.#pointB) *
-      this.#pointB.findDistanceTo(this.pointC)
-    );
+    const length = this.pointA.findDistanceTo(this.#pointB);
+    const width = this.#pointB.findDistanceTo(this.pointC);
+    return length * width;
   }
   hasPoint(point) {
     if (!(point instanceof Point)) return false;
