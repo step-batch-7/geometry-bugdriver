@@ -1,5 +1,6 @@
 const assert = require("chai").assert;
 const Rectangle = require("../src/rectangle");
+const Point = require("../src/point");
 
 describe("Rectangle", () => {
   describe("#toString", () => {
@@ -42,6 +43,7 @@ describe("Rectangle", () => {
       assert.strictEqual(rectangle.perimeter, 28);
     });
   });
+
   describe("#area", () => {
     it("should give area of rectangle if diagonal is not parallel to x of y axis", () => {
       const rectangle = new Rectangle({ x: 8, y: 10 }, { x: 22, y: 5 });
@@ -50,6 +52,43 @@ describe("Rectangle", () => {
     it("should give area of rectangle if diagonal is parallel to x of y axis", () => {
       const rectangle = new Rectangle({ x: 8, y: 5 }, { x: 22, y: 5 });
       assert.strictEqual(rectangle.area, 0);
+    });
+  });
+
+  describe("#hasPoint", () => {
+    it("should check if point lies on AB side", () => {
+      const rectangle = new Rectangle({ x: 8, y: 13 }, { x: 33, y: 5 });
+      const point = new Point(16, 13);
+      assert.ok(rectangle.hasPoint(point));
+    });
+    it("should check if point lies on BC side", () => {
+      const rectangle = new Rectangle({ x: 8, y: 13 }, { x: 33, y: 5 });
+      const point = new Point(33, 7);
+      assert.ok(rectangle.hasPoint(point));
+    });
+    it("should check if point lies on CD side", () => {
+      const rectangle = new Rectangle({ x: 8, y: 13 }, { x: 33, y: 5 });
+      const point = new Point(15, 5);
+      assert.ok(rectangle.hasPoint(point));
+    });
+    it("should check if point lies on DA side", () => {
+      const rectangle = new Rectangle({ x: 8, y: 13 }, { x: 33, y: 5 });
+      const point = new Point(8, 8);
+      assert.ok(rectangle.hasPoint(point));
+    });
+    it("should check if point lies inside rectangle", () => {
+      const rectangle = new Rectangle({ x: 8, y: 13 }, { x: 33, y: 5 });
+      const point = new Point(25, 10);
+      assert.notOk(rectangle.hasPoint(point));
+    });
+    it("should check if point lies outside rectangle", () => {
+      const rectangle = new Rectangle({ x: 8, y: 13 }, { x: 33, y: 5 });
+      const point = new Point(40, 5);
+      assert.notOk(rectangle.hasPoint(point));
+    });
+    it("should check if point instance is not passed", () => {
+      const rectangle = new Rectangle({ x: 8, y: 13 }, { x: 33, y: 5 });
+      assert.notOk(rectangle.hasPoint({ x: 25, y: 10 }));
     });
   });
 });

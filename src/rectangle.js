@@ -1,32 +1,45 @@
 const Point = require("./point");
+const Line = require("./line");
 
 class Rectangle {
-  constructor(pointa, pointc) {
-    this.pointa = new Point(pointa.x, pointa.y);
-    this.pointc = new Point(pointc.x, pointc.y);
+  #pointB;
+  #pointD;
+  constructor(pointA, pointC) {
+    this.pointA = new Point(pointA.x, pointA.y);
+    this.pointC = new Point(pointC.x, pointC.y);
+    this.#pointB = new Point(this.pointC.x, this.pointA.y);
+    this.#pointD = new Point(this.pointA.x, this.pointC.y);
   }
   toString() {
-    return `[Rectangle (${this.pointa.x},${this.pointa.y}) to (${this.pointc.x},${this.pointc.y})]`;
+    return `[Rectangle (${this.pointA.x},${this.pointA.y}) to (${this.pointC.x},${this.pointC.y})]`;
   }
   isEqualTo(other) {
     if (other === this) return true;
     if (!(other instanceof Rectangle)) return false;
     return (
-      this.pointa.isEqualTo(other.pointa) && this.pointc.isEqualTo(other.pointc)
+      this.pointA.isEqualTo(other.pointA) && this.pointC.isEqualTo(other.pointC)
     );
   }
   get perimeter() {
-    const pointb = new Point(this.pointc.x, this.pointa.y);
     return (
       2 *
-      (this.pointa.findDistanceTo(pointb) + pointb.findDistanceTo(this.pointc))
+      (this.pointA.findDistanceTo(this.#pointB) +
+        this.#pointB.findDistanceTo(this.pointC))
     );
   }
   get area() {
-    const pointb = new Point(this.pointc.x, this.pointa.y);
     return (
-      this.pointa.findDistanceTo(pointb) * pointb.findDistanceTo(this.pointc)
+      this.pointA.findDistanceTo(this.#pointB) *
+      this.#pointB.findDistanceTo(this.pointC)
     );
+  }
+  hasPoint(point) {
+    if (!(point instanceof Point)) return false;
+    const isOnAB = new Line(this.pointA, this.#pointB).hasPoint(point);
+    const isOnBC = new Line(this.#pointB, this.pointC).hasPoint(point);
+    const isOnCD = new Line(this.pointC, this.#pointD).hasPoint(point);
+    const isOnDA = new Line(this.#pointD, this.pointA).hasPoint(point);
+    return isOnAB || isOnBC || isOnCD || isOnDA;
   }
 }
 
