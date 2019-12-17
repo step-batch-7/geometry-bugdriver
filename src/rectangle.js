@@ -55,9 +55,7 @@ class Rectangle {
     const [minX, maxX] = [this.vertexA.x, this.vertexC.x].sort((a, b) => a - b);
     const [minY, maxY] = [this.vertexA.y, this.vertexC.y].sort((a, b) => a - b);
 
-    return (
-      point.x >= minX && point.x <= maxX && point.y >= minY && point.y <= maxY
-    );
+    return point.x > minX && point.x < maxX && point.y > minY && point.y < maxY;
   }
 }
 
