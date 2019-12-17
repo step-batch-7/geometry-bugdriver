@@ -1,7 +1,15 @@
 class Point {
   constructor(x, y) {
-    this.x = x;
-    this.y = y;
+    Object.defineProperties(this, {
+      x: {
+        value: x,
+        writable: false,
+      },
+      y: {
+        value: y,
+        writable: false,
+      },
+    });
   }
   toString() {
     return `[Point @(${this.x},${this.y})]`;
