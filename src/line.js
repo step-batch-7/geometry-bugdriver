@@ -93,6 +93,7 @@ class Line {
     const y = (1 - ratio) * this.start.y + ratio * this.end.y;
     return new Point(x, y);
   }
+
   findPointFromEnd(distance) {
     const line = new Line(this.end, this.start);
     return line.findPointFromStart(distance);

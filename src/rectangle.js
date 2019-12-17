@@ -2,15 +2,23 @@ const Point = require("./point");
 const Line = require("./line");
 
 const getLengthAndWidth = function(vertexA, vertexC) {
-  return [vertexA.x - vertexC.x, vertexA.y - vertexC.y];
+  return [Math.abs(vertexA.x - vertexC.x), Math.abs(vertexA.y - vertexC.y)];
+};
+
+const isNumberInRange = function(range, number) {
+  const [min, max] = range.sort((a, b) => a - b);
+  return number > min && number < max;
+};
+
+const getOtherTwoVertex = function(vertexA, vertexC) {
+  return {
+    vertexB: new Point(vertexC.x, vertexA.y),
+    vertexD: new Point(vertexA.x, vertexC.y),
+  };
 };
 
 class Rectangle {
-  #vertexB;
-  #vertexD;
   constructor(pointA, pointC) {
-    this.#vertexB = new Point(pointC.x, pointA.y);
-    this.#vertexD = new Point(pointA.x, pointC.y);
     Object.defineProperties(this, {
       vertexA: {
         value: new Point(pointA.x, pointA.y),
@@ -22,9 +30,11 @@ class Rectangle {
       },
     });
   }
+
   toString() {
     return `[Rectangle (${this.vertexA.x},${this.vertexA.y}) to (${this.vertexC.x},${this.vertexC.y})]`;
   }
+
   isEqualTo(other) {
     if (other === this) return true;
     if (!(other instanceof Rectangle)) return false;
@@ -33,29 +43,33 @@ class Rectangle {
       this.vertexC.isEqualTo(other.vertexC)
     );
   }
+
   get perimeter() {
     const [length, width] = getLengthAndWidth(this.vertexA, this.vertexC);
-    return 2 * (Math.abs(length) + Math.abs(width));
+    return 2 * (length + width);
   }
+
   get area() {
     const [length, width] = getLengthAndWidth(this.vertexA, this.vertexC);
-    return Math.abs(length * width);
+    return length * width;
   }
+
   hasPoint(point) {
     if (!(point instanceof Point)) return false;
-    const AB = new Line(this.vertexA, this.#vertexB);
-    const BC = new Line(this.#vertexB, this.vertexC);
-    const CD = new Line(this.vertexC, this.#vertexD);
-    const DA = new Line(this.#vertexD, this.vertexA);
+    const { vertexB, vertexD } = getOtherTwoVertex(this.vertexA, this.vertexC);
+    const AB = new Line(this.vertexA, vertexB);
+    const BC = new Line(vertexB, this.vertexC);
+    const CD = new Line(this.vertexC, vertexD);
+    const DA = new Line(vertexD, this.vertexA);
     return point.isOn(AB) || point.isOn(BC) || point.isOn(CD) || point.isOn(DA);
   }
 
   covers(point) {
     if (!(point instanceof Point)) return false;
-    const [minX, maxX] = [this.vertexA.x, this.vertexC.x].sort((a, b) => a - b);
-    const [minY, maxY] = [this.vertexA.y, this.vertexC.y].sort((a, b) => a - b);
-
-    return point.x > minX && point.x < maxX && point.y > minY && point.y < maxY;
+    return (
+      isNumberInRange([this.vertexA.x, this.vertexC.x], point.x) &&
+      isNumberInRange([this.vertexA.y, this.vertexC.y], point.y)
+    );
   }
 }
 

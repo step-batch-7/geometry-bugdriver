@@ -11,6 +11,7 @@ class Point {
       },
     });
   }
+
   toString() {
     return `[Point @(${this.x},${this.y})]`;
   }
