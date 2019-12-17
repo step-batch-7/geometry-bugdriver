@@ -2,7 +2,7 @@ const assert = require("chai").assert;
 const Circle = require("../src/circle");
 const Point = require("../src/point");
 
-describe("#Circle", () => {
+describe("Circle", () => {
   describe("#toString", () => {
     it("should give representation of Circle Object", () => {
       const circle = new Circle({ x: 1, y: 2 }, 5);
