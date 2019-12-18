@@ -14,13 +14,13 @@ const areCollinear = function(point1, point2, point3) {
 
 class Line {
   constructor(start, end) {
+    this.start = new Point(start.x, start.y);
+    this.end = new Point(end.x, end.y);
     Object.defineProperties(this, {
       start: {
-        value: new Point(start.x, start.y),
         writable: false,
       },
       end: {
-        value: new Point(end.x, end.y),
         writable: false,
       },
     });
