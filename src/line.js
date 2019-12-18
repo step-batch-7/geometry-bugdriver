@@ -33,7 +33,8 @@ class Line {
   get slope() {
     const dx = this.end.x - this.start.x;
     const dy = this.end.y - this.start.y;
-    return dy / dx;
+    const slope = dy / dx;
+    return slope == -Infinity ? Infinity : slope;
   }
 
   toString() {
